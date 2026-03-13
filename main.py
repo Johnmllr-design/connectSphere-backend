@@ -31,7 +31,7 @@ app.add_middleware(
 
 # get a claude response
 def get_claude_response(prompt):
-    anthropic_client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_KEY"))
+    anthropic_client = anthropic.Anthropic(api_key=os.environ.get("ANTHROPIC_KEY"))
     message = anthropic_client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=1024,
@@ -46,7 +46,7 @@ class WebSocketTranscriber(StreamingClient):
     def __init__(self, websocket: WebSocket, loop: asyncio.AbstractEventLoop):
         super().__init__(
             StreamingClientOptions(
-                api_key=os.getenv("ASSEMBLYAI_KEY"),
+                api_key=os.environ.get("ASSEMBLYAI_KEY"),
                 api_host="streaming.assemblyai.com",
             )
         )
